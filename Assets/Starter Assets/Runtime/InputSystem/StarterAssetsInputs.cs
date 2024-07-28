@@ -20,8 +20,15 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+		private ThirdPersonController thirdPersonController;
+
+        private void Awake()
+        {
+            thirdPersonController = GetComponent<ThirdPersonController>();
+        }
+
 #if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
@@ -36,7 +43,10 @@ namespace StarterAssets
 
 		public void OnJump(InputValue value)
 		{
-			JumpInput(value.isPressed);
+            // 如果 在攻擊中 就 跳出
+            if (thirdPersonController.isAttacking) return;
+
+            JumpInput(value.isPressed);
 		}
 
 		public void OnSprint(InputValue value)
@@ -58,7 +68,10 @@ namespace StarterAssets
 
 		public void JumpInput(bool newJumpState)
 		{
-			jump = newJumpState;
+            // 如果 在攻擊中 就 跳出
+            if (thirdPersonController.isAttacking) return;
+
+            jump = newJumpState;
 		}
 
 		public void SprintInput(bool newSprintState)

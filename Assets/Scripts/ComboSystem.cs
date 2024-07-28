@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using StarterAssets;
+using System.Collections;
 using UnityEngine;
 
 namespace Mtaka
@@ -24,10 +25,13 @@ namespace Mtaka
         private float[] animationsLength = { 1.33f, 1.58f, 1.66f, 2.23f };
         private WaitForSeconds[] waitAnimationsTime;
         private bool isAttacking;
+        private ThirdPersonController thirdPersonController;
 
         private void Awake()
         {
             ani = GetComponent<Animator>();
+            thirdPersonController = GetComponent<ThirdPersonController>();
+
             // 最佳化：初始化等待時間
             waitBreakComboTime = new WaitForSeconds(breakComboTime);
 
@@ -48,6 +52,9 @@ namespace Mtaka
         /// </summary>
         private void ComboIndexHandle()
         {
+            // 如果 不在地板上 就 跳出
+            if (!thirdPersonController.Grounded) return;
+            // 如果 攻擊中 就 跳出
             if (isAttacking) return;
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -75,11 +82,14 @@ namespace Mtaka
 
         private IEnumerator AttackTimeHandle()
         {
-            // 正在攻擊中
+            // 進入攻擊中
             isAttacking = true;
+            thirdPersonController.isAttacking = true;
+            // 等待當前攻擊動畫結束 (動畫長度)
             yield return waitAnimationsTime[comboIndex];
             // 攻擊結束
             isAttacking = false;
+            thirdPersonController.isAttacking = false;
 
             yield return waitBreakComboTime;
             comboIndex = -1;

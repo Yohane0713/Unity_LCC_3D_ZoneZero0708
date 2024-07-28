@@ -75,6 +75,9 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        [Header("攻擊"), Tooltip("是否在攻擊中")]
+        public bool isAttacking;
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -213,6 +216,9 @@ namespace StarterAssets
 
         private void Move()
         {
+            // 如果 攻擊中 就 跳出
+            if (isAttacking) return;
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
@@ -281,6 +287,9 @@ namespace StarterAssets
 
         private void JumpAndGravity()
         {
+            // 如果 攻擊中 就 跳出
+            if (isAttacking) return;
+
             if (Grounded)
             {
                 // reset the fall timeout timer
