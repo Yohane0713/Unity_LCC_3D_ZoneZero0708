@@ -14,6 +14,8 @@ namespace Mtaka
         private string damageObjectTag;
         [SerializeField, Header("文字傷害值預製物")]
         private GameObject prefabTextDamage;
+        [SerializeField, Header("文字傷害值位移"), Range(0, 500)]
+        private float textDamageOffset;
 
         private Transform transformCanvas;
         protected float hp, hpMax;
@@ -66,6 +68,11 @@ namespace Mtaka
             // 生成文字傷害值預製物，並指定父物件為「畫布主要介面」
             GameObject tempTextDamage = Instantiate(prefabTextDamage, transformCanvas);
             tempTextDamage.GetComponent<TMP_Text>().text = damage.ToString();
+            // 獲得傷害值管理器並給予座標與位移資訊
+            DamageManager tempDamage = tempTextDamage.GetComponent <DamageManager>();
+            tempDamage.targetPoint = transform;
+            tempDamage.offset = textDamageOffset;
+            Destroy(tempDamage, 1.5f);
         }
     }
 }
