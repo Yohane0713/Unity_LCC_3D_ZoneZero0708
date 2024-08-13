@@ -48,9 +48,8 @@ namespace Mtaka
             // 如果 血量 <= 0 就跳出
             if (hp <= 0) return;
             hp -= damage;
-            hp = Mathf.Clamp(hp, 0, hpMax);
-            string parDamage = parDamages[Random.Range(0, parDamages.Length)];
-            ani.SetTrigger(parDamage);
+            hp = Mathf.Clamp(hp, 0, hpMax);   
+
             if (hp <= 0) Dead();
         }
 

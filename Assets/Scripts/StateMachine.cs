@@ -17,6 +17,13 @@ namespace Mtaka
             currentState = stateDefault;
         }
 
+        // 元件被關閉 (enabled = false) 時會執行一次
+        private void OnDisable()
+        {
+            currentState.StateExit();
+            print("<color=#f36>狀態機停止</color>");
+        }
+
         private void Update()
         {
             UpdateState();
@@ -34,7 +41,7 @@ namespace Mtaka
         /// 更變狀態機
         /// </summary>
         /// <param name="nextState">下一個狀態</param>
-        private void ChangeState(IState nextState)
+        public void ChangeState(IState nextState)
         {
             // 原本的狀態 離開
             currentState.StateExit();
