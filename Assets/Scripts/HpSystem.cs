@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Mtaka
 {
@@ -22,6 +23,7 @@ namespace Mtaka
         protected Animator ani;
         protected string[] parDamages;
         protected string parDead = "觸發死亡";
+        protected Image imgHp;
 
         protected virtual void Awake()
         {
@@ -34,6 +36,8 @@ namespace Mtaka
         // OTE 觸發事件：碰到勾選 Is Trigger 物件會執行一次
         private void OnTriggerEnter(Collider other)
         {
+            if (hp <= 0) return;
+            // 如果 碰到物件的標籤 等於 造成傷害標籤就受傷
             if (other.tag == damageObjectTag)
             {
                 float attack = other.GetComponent<IAttack>().attack;
@@ -49,8 +53,16 @@ namespace Mtaka
             if (hp <= 0) return;
             hp -= damage;
             hp = Mathf.Clamp(hp, 0, hpMax);   
-
+            UpdateUI();
             if (hp <= 0) Dead();
+        }
+
+        /// <summary>
+        /// 更新介面
+        /// </summary>
+        protected virtual void UpdateUI()
+        {
+            imgHp.fillAmount = hp / hpMax;
         }
 
         protected virtual void Dead()
@@ -68,7 +80,7 @@ namespace Mtaka
             GameObject tempTextDamage = Instantiate(prefabTextDamage, transformCanvas);
             tempTextDamage.GetComponent<TMP_Text>().text = damage.ToString();
             // 獲得傷害值管理器並給予座標與位移資訊
-            DamageManager tempDamage = tempTextDamage.GetComponent <DamageManager>();
+            WorldToUI tempDamage = tempTextDamage.GetComponent <WorldToUI>();
             tempDamage.targetPoint = transform;
             tempDamage.offset = textDamageOffset;
             Destroy(tempDamage, 1.5f);
