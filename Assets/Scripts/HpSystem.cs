@@ -41,13 +41,13 @@ namespace Mtaka
             if (other.tag == damageObjectTag)
             {
                 float attack = other.GetComponent<IAttack>().attack;
-                print($"<color=#933>造成傷害：{attack}</color>");
-                Damage(attack);
+                float imbalance = other.GetComponent<IAttack>().imbalance;
+                Damage(attack, imbalance);
                 SpawnTextDamageAndUpdateText(attack);
             }
         }
 
-        protected virtual void Damage(float damage)
+        protected virtual void Damage(float damage, float imbalance = 0)
         {
             // 如果 血量 <= 0 就跳出
             if (hp <= 0) return;

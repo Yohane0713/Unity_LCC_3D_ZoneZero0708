@@ -11,5 +11,9 @@ namespace Mtaka
         /// §ðÀ»¤O
         /// </summary>
         public float attack { get; }
+        /// <summary>
+        /// ¥¢¿Å
+        /// </summary>
+        public float imbalance { get; }
     }
 }

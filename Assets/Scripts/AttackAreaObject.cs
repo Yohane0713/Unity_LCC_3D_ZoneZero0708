@@ -2,16 +2,26 @@ using UnityEngine;
 
 namespace Mtaka
 {
+    /// <summary>
+    /// 攻擊區域物件
+    /// </summary>
     public class AttackAreaObject : MonoBehaviour, IAttack
     {
         public float attack
         {
-            get => _attack + Mathf.Ceil(Random.Range(0, _attack * attackFloat));
+            get => 
+                dataAttack.attack +
+                Mathf.Ceil(Random.Range(0, dataAttack.attack * dataAttack.attackFloat));
         }
 
-        [SerializeField, Header("攻擊力"), Range(0, 1000)]
-        private float _attack;
-        [SerializeField, Header("攻擊力浮動"), Range(0, 1)]
-        private float attackFloat;
+        public float imbalance
+        {
+            get =>
+                dataAttack.imbalance +
+                Mathf.Ceil(Random.Range(0, dataAttack.imbalance * dataAttack.imbalanceFloat));
+        }
+
+        [SerializeField, Header("攻擊資料")]
+        private DataAttack dataAttack;
     }
 }

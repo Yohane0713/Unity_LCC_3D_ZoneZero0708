@@ -11,9 +11,22 @@ namespace Mtaka
         private State stateDefault;
 
         private IState currentState;
+        private HpEnemy hpEnemy;
+        private bool isImbalancing;
 
         private void Awake()
         {
+            currentState = stateDefault;
+            hpEnemy = GetComponent<HpEnemy>();
+            hpEnemy.onImbalance += Imbalancing;
+        }
+
+        /// <summary>
+        /// ¥¢¿Å¤¤
+        /// </summary>
+        private void Imbalancing(object sender, System.EventArgs e)
+        {
+            isImbalancing = true;
             currentState = stateDefault;
         }
 
@@ -26,6 +39,7 @@ namespace Mtaka
 
         private void Update()
         {
+            if (isImbalancing) return;
             UpdateState();
         }
 
