@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 150
   attackFloat: 0.35
-  imbalance: 20
+  imbalance: 45
   imbalanceFloat: 0.7

@@ -45,6 +45,12 @@ namespace Mtaka
         private IEnumerator Attack()
         {
             if (isAttacking) yield break;
+            // 攻擊時面向玩家處理，先獲得玩家座標
+            Vector3 target = playerPoint.position;
+            // 避免高度不同導致旋轉，將目標座標的高度設定為此物件的高度
+            target.y = transform.position.y;
+            // 面向座標目標
+            transform.LookAt(target);
             isAttacking = true;
             ani.SetFloat(parMove, 0);
             ani.SetTrigger(parAttack);

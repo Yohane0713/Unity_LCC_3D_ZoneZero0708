@@ -1,4 +1,5 @@
 ﻿using StarterAssets;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ namespace Mtaka
         private WaitForSeconds[] waitAnimationsTime;
         private bool isAttacking;
         private ThirdPersonController thirdPersonController;
+        private bool usingSkill;
 
         private void Awake()
         {
@@ -40,6 +42,13 @@ namespace Mtaka
             {
                 waitAnimationsTime[i] = new WaitForSeconds(animationsLength[i]);
             }
+
+            SkillManager.instance.onSkill += OnSkill;
+        }
+
+        private void OnSkill(object sender, EventArgs e)
+        {
+            usingSkill = true;
         }
 
         private void Update()
@@ -52,6 +61,8 @@ namespace Mtaka
         /// </summary>
         private void ComboIndexHandle()
         {
+            // 如果 使用技能中 就 跳出
+            if (usingSkill) return;
             // 如果 不在地板上 就 跳出
             if (!thirdPersonController.Grounded) return;
             // 如果 攻擊中 就 跳出

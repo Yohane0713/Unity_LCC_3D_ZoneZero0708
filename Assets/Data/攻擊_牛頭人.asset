@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfe353d8b151cb64d957739c0c6d7266, type: 3}
-  m_Name: "\u653B\u64CA_\u9023\u6BB5_3"
+  m_Name: "\u653B\u64CA_\u725B\u982D\u4EBA"
   m_EditorClassIdentifier: 
   attack: 100
-  attackFloat: 0.3
-  imbalance: 30
-  imbalanceFloat: 0.5
+  attackFloat: 0.2
+  imbalance: 0
+  imbalanceFloat: 0

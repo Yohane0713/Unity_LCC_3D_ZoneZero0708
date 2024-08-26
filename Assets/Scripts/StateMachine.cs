@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Mtaka
@@ -12,22 +13,28 @@ namespace Mtaka
 
         private IState currentState;
         private HpEnemy hpEnemy;
-        private bool isImbalancing;
-
+        private StateEnemyImbalance stateEnemyImbalance;
+        private StateEnemyTrack stateEnemyTrack;
+        
         private void Awake()
         {
             currentState = stateDefault;
             hpEnemy = GetComponent<HpEnemy>();
+            stateEnemyImbalance = GetComponent<StateEnemyImbalance>();
+            stateEnemyTrack = GetComponent<StateEnemyTrack>();
             hpEnemy.onImbalance += Imbalancing;
         }
 
         /// <summary>
         /// 失衡中
         /// </summary>
-        private void Imbalancing(object sender, System.EventArgs e)
+        private void Imbalancing(object sender, float imbalanceTime)
         {
-            isImbalancing = true;
-            currentState = stateDefault;
+            // 失衡狀態的 失衡時間 = 事件接收到的失衡時間
+            stateEnemyImbalance.imbalanceTime = imbalanceTime;
+            stateEnemyTrack.isImbalance = true;
+            // 變更為失衡狀態
+            ChangeState(stateEnemyImbalance);
         }
 
         // 元件被關閉 (enabled = false) 時會執行一次
@@ -39,7 +46,6 @@ namespace Mtaka
 
         private void Update()
         {
-            if (isImbalancing) return;
             UpdateState();
         }
 

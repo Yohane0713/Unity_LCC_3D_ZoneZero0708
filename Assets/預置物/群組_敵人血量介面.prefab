@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f990c838b35ba40a5171eb0dd9242e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 40
+  offset: 60
   targetPoint: {fileID: 0}
   canScale: 1
   scaleValue: 4.5

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +14,7 @@ namespace Mtaka
     /// </summary>
     public class HpEnemy : HpSystem
     {
-        public event EventHandler onImbalance;
+        public event EventHandler<float> onImbalance;
 
         [SerializeField, Header("群組_敵人血量介面")]
         private GameObject prefabHpUI;
@@ -44,7 +46,8 @@ namespace Mtaka
         {
             base.Damage(damage);
             string parDamage = parDamages[Random.Range(0, parDamages.Length)];
-            ani.SetTrigger(parDamage);
+            // 如果不是失衡 就 執行受傷動畫
+            if (!isImbalancing) ani.SetTrigger(parDamage);
             Imbalance(imbalance);
         }
 
@@ -55,12 +58,16 @@ namespace Mtaka
             capsuleCollider.enabled = false;
         }
 
+        private bool isImbalancing;
+
         /// <summary>
         /// 失衡：數值與判定
         /// </summary>
         /// <param name="imbalanceValue">要添加的失衡值</param>
         private void Imbalance(float imbalanceValue)
         {
+            // 如果 失衡中 就跳出
+            if (isImbalancing) return;
             imbalance += imbalanceValue;
             imbalance = Mathf.Clamp(imbalance, 0, imbalanceMax);
             imgImbalance.fillAmount = imbalance / imbalanceMax;
@@ -74,8 +81,41 @@ namespace Mtaka
         /// </summary>
         private void StartImbalance()
         {
+            isImbalancing = true;
             ani.SetTrigger(parImbalance);
-            onImbalance?.Invoke(this, null);
+            onImbalance?.Invoke(this, dataHpEnemy.imbalanceTime);
+            StartCoroutine(Imbalancing(dataHpEnemy.imbalanceTime));
+        }
+
+        /// <summary>
+        /// 失衡中
+        /// </summary>
+        private IEnumerator Imbalancing(float imbalanceTime)
+        {
+            float interval = 0.02f;
+            float count = imbalanceTime / interval;
+            float fill = 1 / count;
+
+            while (count > 0)
+            {
+                // 等待一個影格
+                yield return new WaitForSeconds(interval);
+                count --;
+                imgImbalance.fillAmount -= fill;
+                // F0 是不要小數點的意思
+                textImbalance.text = (imgImbalance.fillAmount * 100).ToString("F0");
+            }
+
+            ImbalanceFinish();
+        }
+
+        /// <summary>
+        /// 失衡結束
+        /// </summary>
+        private void ImbalanceFinish()
+        {
+            imbalance = 0;
+            isImbalancing = false;
         }
 
         /// <summary>

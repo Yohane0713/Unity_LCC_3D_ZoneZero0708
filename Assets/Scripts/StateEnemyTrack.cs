@@ -7,6 +7,8 @@ namespace Mtaka
     /// </summary>
     public class StateEnemyTrack : State
     {
+        public bool isImbalance;
+
         [SerializeField, Header("追蹤速度"), Range(0, 10)]
         private float trackSpeed = 5;
         [SerializeField, Header("攻擊狀態")]
@@ -16,6 +18,8 @@ namespace Mtaka
 
         public override void StateEnter()
         {
+            if (isImbalance) return;
+
             base.StateEnter();
             print("<color=#36f>進入追蹤狀態</color>");
             agent.speed = trackSpeed;
@@ -26,12 +30,15 @@ namespace Mtaka
         public override void StateExit()
         {
             base.StateExit();
-            print("<color=#36f>離開追蹤狀態</color>");
+            // print("<color=#36f>離開追蹤狀態</color>");
+            agent.speed = 0;
         }
 
         public override void StateUpdate()
         {
             base.StateUpdate();
+
+            if (isImbalance) return;
 
             // 如果 可以攻擊 就切換到攻擊狀態 並 跳出
             if (canStartAttack)

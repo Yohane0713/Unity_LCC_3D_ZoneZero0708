@@ -5,7 +5,7 @@ namespace Mtaka
     /// <summary>
     /// 攻擊資料：玩家
     /// </summary>
-    [CreateAssetMenu(menuName = "Mtaka/Attack")]
+    [CreateAssetMenu(menuName = "Mtaka/Attack", order = 0)]
     public class DataAttack : ScriptableObject
     {
         [Header("攻擊力"), Range(0, 1000)]

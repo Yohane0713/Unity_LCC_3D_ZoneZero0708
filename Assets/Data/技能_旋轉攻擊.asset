@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3add20f661bf6e14d8058d777e7f75b5, type: 3}
+  m_Name: "\u6280\u80FD_\u65CB\u8F49\u653B\u64CA"
+  m_EditorClassIdentifier: 
+  attack: 200
+  attackFloat: 0.6
+  imbalance: 50
+  imbalanceFloat: 0.06
+  skillKey: 101
+  skillParameter: "\u89F8\u767C\u6280\u80FD_\u65CB\u8F49\u653B\u64CA"
+  skillAnimationTime: 2.95
