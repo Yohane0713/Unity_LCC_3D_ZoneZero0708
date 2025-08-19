@@ -1,20 +1,20 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Mtaka
 {
     /// <summary>
-    /// §ðÀ»¸ê®Æ¡Gª±®a
+    /// æ”»æ“Šè³‡æ–™ï¼šçŽ©å®¶
     /// </summary>
     [CreateAssetMenu(menuName = "Mtaka/Attack", order = 0)]
     public class DataAttack : ScriptableObject
     {
-        [Header("§ðÀ»¤O"), Range(0, 1000)]
+        [Header("æ”»æ“ŠåŠ›"), Range(0, 1000)]
         public float attack;
-        [Header("§ðÀ»¤O¯B°Ê"), Range(0, 1)]
+        [Header("æ”»æ“ŠåŠ›æµ®å‹•"), Range(0, 1)]
         public float attackFloat;
-        [Header("§ðÀ»¥¢¿Å"), Range(0, 100)]
+        [Header("æ”»æ“Šå¤±è¡¡"), Range(0, 100)]
         public float imbalance;
-        [Header("§ðÀ»¥¢¿Å¯B°Ê"), Range(0, 1)]
+        [Header("æ”»æ“Šå¤±è¡¡æµ®å‹•"), Range(0, 1)]
         public float imbalanceFloat;
     }
 }

@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Mtaka
 {
     /// <summary>
-    /// ¦å¶q¸ê®Æ
+    /// è¡€é‡è³‡æ–™
     /// </summary>
     [CreateAssetMenu(menuName = "Mtaka/Hp", order = 2)]
     public class DataHp : ScriptableObject
     {
-        [Header("¦å¶q"), Range(0, 5000)]
+        [Header("è¡€é‡"), Range(0, 5000)]
         public float hp;
     }
 }

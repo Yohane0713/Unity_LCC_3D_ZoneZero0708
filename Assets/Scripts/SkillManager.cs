@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Mtaka
 {
     /// <summary>
-    /// §Ş¯àºŞ²z¾¹
+    /// æŠ€èƒ½ç®¡ç†å™¨
     /// </summary>
     public class SkillManager : MonoBehaviour
     {
@@ -22,9 +22,9 @@ namespace Mtaka
 
         public event EventHandler onSkill;
 
-        [SerializeField, Header("§Ş¯à¸ê®Æ")]
+        [SerializeField, Header("æŠ€èƒ½è³‡æ–™")]
         private DataSkill dataSkill;
-        [SerializeField, Header("«ì´_Å]¤O¶¡¹j"), Range(0, 2)]
+        [SerializeField, Header("æ¢å¾©é­”åŠ›é–“éš”"), Range(0, 2)]
         private float mpCureInterval = 1;
 
         private Animator ani;
@@ -36,7 +36,7 @@ namespace Mtaka
         private void Awake()
         {
             ani = GetComponent<Animator>();
-            imgMp = GameObject.Find("¹Ï¤ù_Å]¤O").GetComponent<Image>();
+            imgMp = GameObject.Find("åœ–ç‰‡_é­”åŠ›").GetComponent<Image>();
             waitMpCureInterval = new WaitForSeconds(mpCureInterval);
             waitSkillAnimationTime = new WaitForSeconds(dataSkill.skillAnimationTime);
             UpdateUI();
@@ -49,11 +49,11 @@ namespace Mtaka
         }
 
         /// <summary>
-        /// §Ş¯à¿é¤J
+        /// æŠ€èƒ½è¼¸å…¥
         /// </summary>
         private void SkillInput()
         {
-            // ¦pªG Å]¤O¤p©óÅ]¤O³Ì¤j­È´N¸õ¥X
+            // å¦‚æœ é­”åŠ›å°æ–¼é­”åŠ›æœ€å¤§å€¼å°±è·³å‡º
             if (mp < mpMax) return;
 
             if (Input.GetKeyDown(dataSkill.skillKey)) StartCoroutine(Skill());
@@ -71,9 +71,9 @@ namespace Mtaka
 
         private IEnumerator CureMp()
         {
-            // ¦pªGµ¥©óÅ]¤O³Ì¤j­È´N¸õ¥X
+            // å¦‚æœç­‰æ–¼é­”åŠ›æœ€å¤§å€¼å°±è·³å‡º
             if (mp == mpMax) yield break;
-            // ¦pªG¤p©óÅ]¤O³Ì¤j­È´N«ì´_
+            // å¦‚æœå°æ–¼é­”åŠ›æœ€å¤§å€¼å°±æ¢å¾©
             while (mp < mpMax)
             {
                 mp++;

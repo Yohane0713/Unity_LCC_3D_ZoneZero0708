@@ -1,43 +1,43 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Mtaka
 {
     /// <summary>
-    /// ¦å¶q¨t²Î
+    /// è¡€é‡ç³»çµ±
     /// </summary>
     public class HpSystem : MonoBehaviour
     {
-        [SerializeField, Header("¦å¶q¸ê®Æ")]
+        [SerializeField, Header("è¡€é‡è³‡æ–™")]
         protected DataHp dataHp;
-        [SerializeField, Header("³y¦¨¶Ë®`¼ĞÅÒ")]
+        [SerializeField, Header("é€ æˆå‚·å®³æ¨™ç±¤")]
         private string damageObjectTag;
-        [SerializeField, Header("¤å¦r¶Ë®`­È¹w»sª«")]
+        [SerializeField, Header("æ–‡å­—å‚·å®³å€¼é è£½ç‰©")]
         private GameObject prefabTextDamage;
-        [SerializeField, Header("¤å¦r¶Ë®`­È¦ì²¾"), Range(0, 500)]
+        [SerializeField, Header("æ–‡å­—å‚·å®³å€¼ä½ç§»"), Range(0, 500)]
         private float textDamageOffset;
 
         private Transform transformCanvas;
         protected float hp, hpMax;
         protected Animator ani;
         protected string[] parDamages;
-        protected string parDead = "Ä²µo¦º¤`";
+        protected string parDead = "è§¸ç™¼æ­»äº¡";
         protected Image imgHp;
 
         protected virtual void Awake()
         {
             ani = GetComponent<Animator>();
-            transformCanvas = GameObject.Find("µe¥¬¥D­n¤¶­±").transform;
+            transformCanvas = GameObject.Find("ç•«å¸ƒä¸»è¦ä»‹é¢").transform;
             hpMax = dataHp.hp;
             hp = hpMax;
         }
 
-        // OTE Ä²µo¨Æ¥ó¡G¸I¨ì¤Ä¿ï Is Trigger ª«¥ó·|°õ¦æ¤@¦¸
+        // OTE è§¸ç™¼äº‹ä»¶ï¼šç¢°åˆ°å‹¾é¸ Is Trigger ç‰©ä»¶æœƒåŸ·è¡Œä¸€æ¬¡
         private void OnTriggerEnter(Collider other)
         {
             if (hp <= 0) return;
-            // ¦pªG ¸I¨ìª«¥óªº¼ĞÅÒ µ¥©ó ³y¦¨¶Ë®`¼ĞÅÒ´N¨ü¶Ë
+            // å¦‚æœ ç¢°åˆ°ç‰©ä»¶çš„æ¨™ç±¤ ç­‰æ–¼ é€ æˆå‚·å®³æ¨™ç±¤å°±å—å‚·
             if (other.tag == damageObjectTag)
             {
                 float attack = other.GetComponent<IAttack>().attack;
@@ -49,7 +49,7 @@ namespace Mtaka
 
         protected virtual void Damage(float damage, float imbalance = 0)
         {
-            // ¦pªG ¦å¶q <= 0 ´N¸õ¥X
+            // å¦‚æœ è¡€é‡ <= 0 å°±è·³å‡º
             if (hp <= 0) return;
             hp -= damage;
             hp = Mathf.Clamp(hp, 0, hpMax);   
@@ -58,7 +58,7 @@ namespace Mtaka
         }
 
         /// <summary>
-        /// §ó·s¤¶­±
+        /// æ›´æ–°ä»‹é¢
         /// </summary>
         protected virtual void UpdateUI()
         {
@@ -71,15 +71,15 @@ namespace Mtaka
         }
 
         /// <summary>
-        /// ¥Í¦¨¤å¦r¶Ë®`­È¨Ã§ó·s¤å¦r
+        /// ç”Ÿæˆæ–‡å­—å‚·å®³å€¼ä¸¦æ›´æ–°æ–‡å­—
         /// </summary>
-        /// <param name="damage">¶Ë®`­È</param>
+        /// <param name="damage">å‚·å®³å€¼</param>
         private void SpawnTextDamageAndUpdateText(float damage)
         {
-            // ¥Í¦¨¤å¦r¶Ë®`­È¹w»sª«¡A¨Ã«ü©w¤÷ª«¥ó¬°¡uµe¥¬¥D­n¤¶­±¡v
+            // ç”Ÿæˆæ–‡å­—å‚·å®³å€¼é è£½ç‰©ï¼Œä¸¦æŒ‡å®šçˆ¶ç‰©ä»¶ç‚ºã€Œç•«å¸ƒä¸»è¦ä»‹é¢ã€
             GameObject tempTextDamage = Instantiate(prefabTextDamage, transformCanvas);
             tempTextDamage.GetComponent<TMP_Text>().text = damage.ToString();
-            // Àò±o¶Ë®`­ÈºŞ²z¾¹¨Ãµ¹¤©®y¼Ğ»P¦ì²¾¸ê°T
+            // ç²å¾—å‚·å®³å€¼ç®¡ç†å™¨ä¸¦çµ¦äºˆåº§æ¨™èˆ‡ä½ç§»è³‡è¨Š
             WorldToUI tempDamage = tempTextDamage.GetComponent <WorldToUI>();
             tempDamage.targetPoint = transform;
             tempDamage.offset = textDamageOffset;

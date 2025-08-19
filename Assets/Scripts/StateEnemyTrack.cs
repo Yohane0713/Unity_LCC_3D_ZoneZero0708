@@ -1,17 +1,17 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Mtaka
 {
     /// <summary>
-    /// ª¬ºA¡G¼Ä¤H°lÂÜ
+    /// ç‹€æ…‹ï¼šæ•µäººè¿½è¹¤
     /// </summary>
     public class StateEnemyTrack : State
     {
         public bool isImbalance;
 
-        [SerializeField, Header("°lÂÜ³t«×"), Range(0, 10)]
+        [SerializeField, Header("è¿½è¹¤é€Ÿåº¦"), Range(0, 10)]
         private float trackSpeed = 5;
-        [SerializeField, Header("§ğÀ»ª¬ºA")]
+        [SerializeField, Header("æ”»æ“Šç‹€æ…‹")]
         private StateEnemyAttack stateEnemyAttack;
 
         private bool canStartAttack => agent.remainingDistance < agent.stoppingDistance;
@@ -21,7 +21,7 @@ namespace Mtaka
             if (isImbalance) return;
 
             base.StateEnter();
-            print("<color=#36f>¶i¤J°lÂÜª¬ºA</color>");
+            print("<color=#36f>é€²å…¥è¿½è¹¤ç‹€æ…‹</color>");
             agent.speed = trackSpeed;
             agent.isStopped = false;
             agent.SetDestination(playerPoint.position);
@@ -30,7 +30,7 @@ namespace Mtaka
         public override void StateExit()
         {
             base.StateExit();
-            // print("<color=#36f>Â÷¶}°lÂÜª¬ºA</color>");
+            // print("<color=#36f>é›¢é–‹è¿½è¹¤ç‹€æ…‹</color>");
             agent.speed = 0;
         }
 
@@ -40,7 +40,7 @@ namespace Mtaka
 
             if (isImbalance) return;
 
-            // ¦pªG ¥i¥H§ğÀ» ´N¤Á´«¨ì§ğÀ»ª¬ºA ¨Ã ¸õ¥X
+            // å¦‚æœ å¯ä»¥æ”»æ“Š å°±åˆ‡æ›åˆ°æ”»æ“Šç‹€æ…‹ ä¸¦ è·³å‡º
             if (canStartAttack)
             {
                 stateMachine.ChangeState(stateEnemyAttack);
@@ -52,7 +52,7 @@ namespace Mtaka
 
         private void TrackPlayer()
         {
-            // °lÂÜª±®a
+            // è¿½è¹¤ç©å®¶
             agent.SetDestination(playerPoint.position);
             ani.SetFloat(parMove, agent.velocity.magnitude / trackSpeed);
         }

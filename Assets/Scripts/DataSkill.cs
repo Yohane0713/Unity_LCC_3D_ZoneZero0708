@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Mtaka
 {
     /// <summary>
-    /// §Ş¯à¸ê®Æ
+    /// æŠ€èƒ½è³‡æ–™
     /// </summary>
     [CreateAssetMenu(menuName = "Mtaka/Skill", order = 1)]
     public class DataSkill : DataAttack
     {
-        [Header("§Ş¯à«öÁä¡B°Êµe°Ñ¼Æ¡B°Êµe®É¶¡")]
+        [Header("æŠ€èƒ½æŒ‰éµã€å‹•ç•«åƒæ•¸ã€å‹•ç•«æ™‚é–“")]
         public KeyCode skillKey;
         public string skillParameter;
         [Range(0, 10)]

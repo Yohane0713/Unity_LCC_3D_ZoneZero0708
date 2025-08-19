@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.AI;
 
 namespace Mtaka
@@ -8,8 +8,8 @@ namespace Mtaka
     {
         protected StateMachine stateMachine;
         protected Animator ani;
-        protected string parMove = "¯BÂI¼Æ²¾°Ê";
-        protected string playerName = "³·¤k";
+        protected string parMove = "æµ®é»žæ•¸ç§»å‹•";
+        protected string playerName = "é›ªå¥³";
         protected Transform playerPoint;
         protected NavMeshAgent agent;
 

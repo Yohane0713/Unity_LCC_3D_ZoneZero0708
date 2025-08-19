@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 namespace Mtaka
@@ -30,17 +30,17 @@ namespace Mtaka
         public override void StateUpdate()
         {
             base.StateUpdate();
-            // ¥N²z¾¹ªº³t«×Âk¹s
+            // ä»£ç†å™¨çš„é€Ÿåº¦æ­¸é›¶
             agent.speed = 0;
         }
 
         /// <summary>
-        /// ¥¢¿Åµ²§ô
+        /// å¤±è¡¡çµæŸ
         /// </summary>
         private IEnumerator ImbalanceFinish()
         {
             yield return waitImbalanceTime;
-            print("¥¢¿Åµ²§ô");
+            print("å¤±è¡¡çµæŸ");
         }
     }
 }

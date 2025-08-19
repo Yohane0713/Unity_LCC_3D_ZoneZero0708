@@ -1,18 +1,18 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Mtaka
 {
     /// <summary>
-    /// ¶Ë®`­ÈºŞ²z¾¹
+    /// å‚·å®³å€¼ç®¡ç†å™¨
     /// </summary>
     public class WorldToUI : MonoBehaviour
     {
         public float offset;
         public Transform targetPoint;
 
-        [SerializeField, Header("¬O§_ÁY©ñ")]
+        [SerializeField, Header("æ˜¯å¦ç¸®æ”¾")]
         private bool canScale;
-        [SerializeField, Header("ÁY©ñ¼Æ­È"), Range(0, 20)]
+        [SerializeField, Header("ç¸®æ”¾æ•¸å€¼"), Range(0, 20)]
         private float scaleValue = 5;
 
         private RectTransform rectTransform;
@@ -38,18 +38,18 @@ namespace Mtaka
 
         private void SwitchPoint()
         {
-            print($"<color=#77f>ª«¥óªº®y¼Ğ¡G{targetPoint.position}</color>");
-            // 3D Âà¬° 2D®y¼Ğ
-            // ViewportPoint ¥ª¤U¨¤¬°­ìÂI (0, 0) ¥k¤W¨¤¬°³Ì¤j­È (1, 1)
+            print($"<color=#77f>ç‰©ä»¶çš„åº§æ¨™ï¼š{targetPoint.position}</color>");
+            // 3D è½‰ç‚º 2Dåº§æ¨™
+            // ViewportPoint å·¦ä¸‹è§’ç‚ºåŸé» (0, 0) å³ä¸Šè§’ç‚ºæœ€å¤§å€¼ (1, 1)
             // Vector3 print2D = Camera.main.WorldToViewportPoint(targetPoint.position);
-            // ScreenPoint ¥ª¤U¨¤¬°­ìÂI (0, 0) ¥k¤W¨¤¬°³Ì¤j­È (¿Ã¹õ·í«e³Ì¤j¼e«×, ¿Ã¹õ·í«e³Ì¤j°ª«×)
+            // ScreenPoint å·¦ä¸‹è§’ç‚ºåŸé» (0, 0) å³ä¸Šè§’ç‚ºæœ€å¤§å€¼ (è¢å¹•ç•¶å‰æœ€å¤§å¯¬åº¦, è¢å¹•ç•¶å‰æœ€å¤§é«˜åº¦)
             Vector3 point2D = Camera.main.WorldToScreenPoint(targetPoint.position);
-            // print($"<color=#77f>ª«¥óªº®y¼Ğ¡G{point2D}</color>");
+            // print($"<color=#77f>ç‰©ä»¶çš„åº§æ¨™ï¼š{point2D}</color>");
 
-            // ¤¶­±ªº­ìÂI¬°¥¿¤¤¥¡¡A¥k¤W¨¤¬°³Ì¤j­È (¿Ã¹õ·í«e³Ì¤j¼e«×/2, ¿Ã¹õ·í«e³Ì¤j°ª«×/2)
-            // ¤¶­±ªº­ìÂI¬°¥¿¤¤¥¡¡A¥ª¤U¨¤¬°³Ì¤j­È (-¿Ã¹õ·í«e³Ì¤j¼e«×/2, -¿Ã¹õ·í«e³Ì¤j°ª«×/2)
+            // ä»‹é¢çš„åŸé»ç‚ºæ­£ä¸­å¤®ï¼Œå³ä¸Šè§’ç‚ºæœ€å¤§å€¼ (è¢å¹•ç•¶å‰æœ€å¤§å¯¬åº¦/2, è¢å¹•ç•¶å‰æœ€å¤§é«˜åº¦/2)
+            // ä»‹é¢çš„åŸé»ç‚ºæ­£ä¸­å¤®ï¼Œå·¦ä¸‹è§’ç‚ºæœ€å¤§å€¼ (-è¢å¹•ç•¶å‰æœ€å¤§å¯¬åº¦/2, -è¢å¹•ç•¶å‰æœ€å¤§é«˜åº¦/2)
 
-            // ¿Ã¹õ®y¼ĞÂà¬°¤¶­±®y¼Ğ(µe¥¬ªºÅÜ§Î¡A¿Ã¹õ®y¼Ğ¡Aµe¥¬ªºÄá¼v¾÷¡AÂà´««áªº¤¶­±®y¼Ğ)
+            // è¢å¹•åº§æ¨™è½‰ç‚ºä»‹é¢åº§æ¨™(ç•«å¸ƒçš„è®Šå½¢ï¼Œè¢å¹•åº§æ¨™ï¼Œç•«å¸ƒçš„æ”å½±æ©Ÿï¼Œè½‰æ›å¾Œçš„ä»‹é¢åº§æ¨™)
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 rectCanvas, point2D ,cameraCanvas, out Vector2 pointUI);
             rectTransform.anchoredPosition = pointUI;
@@ -61,7 +61,7 @@ namespace Mtaka
         {
             if (!canScale) return; 
             float distance = Vector3.Distance(targetPoint.position, cameraPoint.position);
-            print($"<color=#3f3>»PÄá¼v¾÷ªº¶ZÂ÷¡G{distance}</color>");
+            print($"<color=#3f3>èˆ‡æ”å½±æ©Ÿçš„è·é›¢ï¼š{distance}</color>");
             rectTransform.localScale = Vector2.one * (scaleValue / distance);
         }
     }

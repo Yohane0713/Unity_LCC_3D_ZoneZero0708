@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Mtaka
 {
     /// <summary>
-    /// ª¬ºA¤¶­±
+    /// ç‹€æ…‹ä»‹é¢
     /// </summary>
     public interface IState
     {

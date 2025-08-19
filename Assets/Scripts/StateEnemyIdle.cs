@@ -1,32 +1,32 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Mtaka
 {
     /// <summary>
-    /// ª¬ºA¡G²¾°Ê©M«İ¾÷
+    /// ç‹€æ…‹ï¼šç§»å‹•å’Œå¾…æ©Ÿ
     /// </summary>
     public class StateEnemyIdle : State
     {
-        [SerializeField, Header("²¾°Ê³t«×"), Range(0, 10)]
+        [SerializeField, Header("ç§»å‹•é€Ÿåº¦"), Range(0, 10)]
         private float moveSpeed = 2;
-        [SerializeField, Header("°±¤î¶ZÂ÷"), Range(0, 10)]
+        [SerializeField, Header("åœæ­¢è·é›¢"), Range(0, 10)]
         private float stopDistance = 1.5f;
-        [SerializeField, Header("ÀH¾÷¹C¨«½d³ò"), Range(0, 10)]
+        [SerializeField, Header("éš¨æ©ŸéŠèµ°ç¯„åœ"), Range(0, 10)]
         private float wanderRange = 2;
-        [SerializeField, Header("ÀH¾÷¹C¨«ÃC¦â")]
+        [SerializeField, Header("éš¨æ©ŸéŠèµ°é¡è‰²")]
         private Color wanderColor;
-        [Header("ÀH¾÷µ¥«İ½d³ò")]
+        [Header("éš¨æ©Ÿç­‰å¾…ç¯„åœ")]
         [SerializeField, Range(0, 10)]
         private float idleMin, idleMax;
-        [SerializeField, Header("°lÂÜª±®a½d³ò"), Range(0, 50)]
+        [SerializeField, Header("è¿½è¹¤ç©å®¶ç¯„åœ"), Range(0, 50)]
         private float trackRange = 2;
-        [SerializeField, Header("°lÂÜ½d³ò")]
+        [SerializeField, Header("è¿½è¹¤ç¯„åœ")]
         private Color trackColor;
-        [SerializeField, Header("°lÂÜ¹Ï¼h")]
+        [SerializeField, Header("è¿½è¹¤åœ–å±¤")]
         private LayerMask trackLayer = 1 << 3;
-        [SerializeField, Header("°lÂÜª¬ºA")]
+        [SerializeField, Header("è¿½è¹¤ç‹€æ…‹")]
         private State stateTrack;
 
         private Vector3 target;
@@ -50,13 +50,13 @@ namespace Mtaka
         public override void StateEnter()
         {
             base.StateEnter();
-            print("<color=#6f6>¶i¤J«İ¾÷ª¬ºA</color>");
+            print("<color=#6f6>é€²å…¥å¾…æ©Ÿç‹€æ…‹</color>");
         }
 
         public override void StateExit()
         {
             base.StateExit();
-            print("<color=#6f6>Â÷¶}«İ¾÷ª¬ºA</color>");
+            print("<color=#6f6>é›¢é–‹å¾…æ©Ÿç‹€æ…‹</color>");
             StopAllCoroutines();
         }
 
@@ -65,15 +65,15 @@ namespace Mtaka
             base.StateUpdate();
             
             if (CheckPlayer()) return;
-            // print("<color=#3f3>°õ¦æ¼Ä¤Hª¬ºA«İ¾÷¤¤</color>");
-            // ¦pªG°±¤î´N¸õ¥X
+            // print("<color=#3f3>åŸ·è¡Œæ•µäººç‹€æ…‹å¾…æ©Ÿä¸­</color>");
+            // å¦‚æœåœæ­¢å°±è·³å‡º
             if (agent.isStopped) return;
-            // ³]©w¥N²z¾¹ªº¥Øªº¦a(¥Ø¼Ğª«¥óªº®y¼Ğ)
+            // è¨­å®šä»£ç†å™¨çš„ç›®çš„åœ°(ç›®æ¨™ç‰©ä»¶çš„åº§æ¨™)
             agent.SetDestination(target);
-            // §ó·s²¾°Ê°Êµe
+            // æ›´æ–°ç§»å‹•å‹•ç•«
             ani.SetFloat(parMove, agent.velocity.magnitude / moveSpeed);
-            // print($"<color=#923>»P¥Ø¼Ğªº³Ñ¾l¶ZÂ÷¡G{agent.remainingDistance}</color>");
-            // ¦pªG³Ñ¾l¶ZÂ÷¤p©ó°±¤î¶ZÂ÷´N§ä¨ì·sªºÀH¾÷®y¼Ğ
+            // print($"<color=#923>èˆ‡ç›®æ¨™çš„å‰©é¤˜è·é›¢ï¼š{agent.remainingDistance}</color>");
+            // å¦‚æœå‰©é¤˜è·é›¢å°æ–¼åœæ­¢è·é›¢å°±æ‰¾åˆ°æ–°çš„éš¨æ©Ÿåº§æ¨™
             if (agent.remainingDistance < stopDistance)
             {
                 StartCoroutine(StopWander());
@@ -91,11 +91,11 @@ namespace Mtaka
         }
 
         /// <summary>
-        /// Àò±o½d³ò¤ºªºÀH¾÷®y¼Ğ
+        /// ç²å¾—ç¯„åœå…§çš„éš¨æ©Ÿåº§æ¨™
         /// </summary>
         private Vector3 RandomPointInRange()
         {
-            // Àò±o ¨¤¦â¬°¤¤¤ßÂI ¹C¨«½d³ò¤ºªº ÀH¾÷®y¼Ğ
+            // ç²å¾— è§’è‰²ç‚ºä¸­å¿ƒé» éŠèµ°ç¯„åœå…§çš„ éš¨æ©Ÿåº§æ¨™
             Vector3 randomPoint = transform.position + Random.insideUnitSphere * wanderRange;
 
             NavMeshHit hit;
@@ -114,8 +114,8 @@ namespace Mtaka
         {
             Collider[] hits = Physics.OverlapSphere(transform.position, trackRange, trackLayer);
             if (hits.Length == 0) return false;
-            print("<color=#f33>°»´ú¨ìª±®a</color>");
-            // Âà´«¨ì°lÂÜª¬ºA
+            print("<color=#f33>åµæ¸¬åˆ°ç©å®¶</color>");
+            // è½‰æ›åˆ°è¿½è¹¤ç‹€æ…‹
             stateMachine.ChangeState(stateTrack);
 
             return hits.Length > 0;

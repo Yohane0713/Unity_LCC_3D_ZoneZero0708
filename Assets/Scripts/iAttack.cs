@@ -1,18 +1,18 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Mtaka
 {
     /// <summary>
-    /// ¤¶­±¡G§ğÀ»
+    /// ä»‹é¢ï¼šæ”»æ“Š
     /// </summary>
     public interface IAttack
     {
         /// <summary>
-        /// §ğÀ»¤O
+        /// æ”»æ“ŠåŠ›
         /// </summary>
         public float attack { get; }
         /// <summary>
-        /// ¥¢¿Å
+        /// å¤±è¡¡
         /// </summary>
         public float imbalance { get; }
     }

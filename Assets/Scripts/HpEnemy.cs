@@ -1,34 +1,34 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-// System©MUnityEngine³£¦³ÀH¾÷¤èªk¥i¥H¥Î ·|½Ä¬ğ
+// Systemå’ŒUnityEngineéƒ½æœ‰éš¨æ©Ÿæ–¹æ³•å¯ä»¥ç”¨ æœƒè¡çª
 
 namespace Mtaka
 {
     /// <summary>
-    /// ¦å¶q¨t²Î¡G¼Ä¤H
+    /// è¡€é‡ç³»çµ±ï¼šæ•µäºº
     /// </summary>
     public class HpEnemy : HpSystem
     {
         public event EventHandler<float> onImbalance;
 
-        [SerializeField, Header("¸s²Õ_¼Ä¤H¦å¶q¤¶­±")]
+        [SerializeField, Header("ç¾¤çµ„_æ•µäººè¡€é‡ä»‹é¢")]
         private GameObject prefabHpUI;
 
         private StateMachine stateMachine;
         private CapsuleCollider capsuleCollider;
         /// <summary>
-        /// µe¥¬¥D­n¤¶­±
+        /// ç•«å¸ƒä¸»è¦ä»‹é¢
         /// </summary>
         private Transform canvas;
         private Image imgImbalance;
         private TMP_Text textImbalance;
         private float imbalance, imbalanceMax = 100;
-        private string parImbalance = "Ä²µo¥¢¿Å";
+        private string parImbalance = "è§¸ç™¼å¤±è¡¡";
         private DataHpEnemy dataHpEnemy;
 
         protected override void Awake()
@@ -37,8 +37,8 @@ namespace Mtaka
             dataHpEnemy = (DataHpEnemy)dataHp;
             stateMachine = GetComponent<StateMachine>();
             capsuleCollider = GetComponent<CapsuleCollider>();
-            canvas = GameObject.Find("µe¥¬¥D­n¤¶­±").transform;
-            parDamages = new string[] { "Ä²µo¨ü¶Ë1", "Ä²µo¨ü¶Ë2" };
+            canvas = GameObject.Find("ç•«å¸ƒä¸»è¦ä»‹é¢").transform;
+            parDamages = new string[] { "è§¸ç™¼å—å‚·1", "è§¸ç™¼å—å‚·2" };
             SpawnUI();
         }
 
@@ -46,7 +46,7 @@ namespace Mtaka
         {
             base.Damage(damage);
             string parDamage = parDamages[Random.Range(0, parDamages.Length)];
-            // ¦pªG¤£¬O¥¢¿Å ´N °õ¦æ¨ü¶Ë°Êµe
+            // å¦‚æœä¸æ˜¯å¤±è¡¡ å°± åŸ·è¡Œå—å‚·å‹•ç•«
             if (!isImbalancing) ani.SetTrigger(parDamage);
             Imbalance(imbalance);
         }
@@ -61,23 +61,23 @@ namespace Mtaka
         private bool isImbalancing;
 
         /// <summary>
-        /// ¥¢¿Å¡G¼Æ­È»P§P©w
+        /// å¤±è¡¡ï¼šæ•¸å€¼èˆ‡åˆ¤å®š
         /// </summary>
-        /// <param name="imbalanceValue">­n²K¥[ªº¥¢¿Å­È</param>
+        /// <param name="imbalanceValue">è¦æ·»åŠ çš„å¤±è¡¡å€¼</param>
         private void Imbalance(float imbalanceValue)
         {
-            // ¦pªG ¥¢¿Å¤¤ ´N¸õ¥X
+            // å¦‚æœ å¤±è¡¡ä¸­ å°±è·³å‡º
             if (isImbalancing) return;
             imbalance += imbalanceValue;
             imbalance = Mathf.Clamp(imbalance, 0, imbalanceMax);
             imgImbalance.fillAmount = imbalance / imbalanceMax;
             textImbalance.text = imbalance.ToString();
-            // ¥¢¿Å­È ¤j©óµ¥©ó ¥¢¿Å­È¤W­­ ´N¶}©l¥¢¿Å
+            // å¤±è¡¡å€¼ å¤§æ–¼ç­‰æ–¼ å¤±è¡¡å€¼ä¸Šé™ å°±é–‹å§‹å¤±è¡¡
             if (imbalance >= imbalanceMax) StartImbalance();
         }
 
         /// <summary>
-        /// ¶}©l¥¢¿Å
+        /// é–‹å§‹å¤±è¡¡
         /// </summary>
         private void StartImbalance()
         {
@@ -88,7 +88,7 @@ namespace Mtaka
         }
 
         /// <summary>
-        /// ¥¢¿Å¤¤
+        /// å¤±è¡¡ä¸­
         /// </summary>
         private IEnumerator Imbalancing(float imbalanceTime)
         {
@@ -98,11 +98,11 @@ namespace Mtaka
 
             while (count > 0)
             {
-                // µ¥«İ¤@­Ó¼v®æ
+                // ç­‰å¾…ä¸€å€‹å½±æ ¼
                 yield return new WaitForSeconds(interval);
                 count --;
                 imgImbalance.fillAmount -= fill;
-                // F0 ¬O¤£­n¤p¼ÆÂIªº·N«ä
+                // F0 æ˜¯ä¸è¦å°æ•¸é»çš„æ„æ€
                 textImbalance.text = (imgImbalance.fillAmount * 100).ToString("F0");
             }
 
@@ -110,7 +110,7 @@ namespace Mtaka
         }
 
         /// <summary>
-        /// ¥¢¿Åµ²§ô
+        /// å¤±è¡¡çµæŸ
         /// </summary>
         private void ImbalanceFinish()
         {
@@ -119,15 +119,15 @@ namespace Mtaka
         }
 
         /// <summary>
-        /// ¥Í¦¨¤¶­±
+        /// ç”Ÿæˆä»‹é¢
         /// </summary>
         private void SpawnUI()
         {
             GameObject tempHpUI = Instantiate(prefabHpUI, canvas);
             tempHpUI.GetComponent<WorldToUI>().targetPoint = transform;
-            imgHp = tempHpUI.transform.Find("¹Ï¤ù_¦å±ø").GetComponent<Image>();
-            imgImbalance = tempHpUI.transform.Find("¹Ï¤ù_¥¢¿Å").GetComponent<Image>();
-            textImbalance = tempHpUI.transform.Find("¤å¦r_¥¢¿Å").GetComponent<TMP_Text>();
+            imgHp = tempHpUI.transform.Find("åœ–ç‰‡_è¡€æ¢").GetComponent<Image>();
+            imgImbalance = tempHpUI.transform.Find("åœ–ç‰‡_å¤±è¡¡").GetComponent<Image>();
+            textImbalance = tempHpUI.transform.Find("æ–‡å­—_å¤±è¡¡").GetComponent<TMP_Text>();
         }
     }
 }

@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Mtaka
 {
     /// <summary>
-    /// §ğÀ»°Ï°ìª«¥ó
+    /// æ”»æ“Šå€åŸŸç‰©ä»¶
     /// </summary>
     public class AttackAreaObject : MonoBehaviour, IAttack
     {
@@ -21,7 +21,7 @@ namespace Mtaka
                 Mathf.Ceil(Random.Range(0, dataAttack.imbalance * dataAttack.imbalanceFloat));
         }
 
-        [SerializeField, Header("§ğÀ»¸ê®Æ")]
+        [SerializeField, Header("æ”»æ“Šè³‡æ–™")]
         private DataAttack dataAttack;
     }
 }

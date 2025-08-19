@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 namespace Mtaka
 {
     /// <summary>
-    /// ¦å¶q¸ê®Æ¡G¼Ä¤H
+    /// è¡€é‡è³‡æ–™ï¼šæ•µäºº
     /// </summary>
     [CreateAssetMenu(menuName = "Mtaka/Hp Enemy", order = 3)]
     public class DataHpEnemy : DataHp
     {
-        [Header("¥¢¿Å®É¶¡"), Range(0, 1000)]
+        [Header("å¤±è¡¡æ™‚é–“"), Range(0, 1000)]
         public float imbalanceTime;
     }
 }

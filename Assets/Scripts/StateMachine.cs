@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 namespace Mtaka
 {
     /// <summary>
-    /// ª¬ºA¾÷¡GºŞ²zª¬ºA¾÷
+    /// ç‹€æ…‹æ©Ÿï¼šç®¡ç†ç‹€æ…‹æ©Ÿ
     /// </summary>
     public class StateMachine : MonoBehaviour
     {
-        [SerializeField, Header("¹w³]ª¬ºA")]
+        [SerializeField, Header("é è¨­ç‹€æ…‹")]
         private State stateDefault;
 
         private IState currentState;
@@ -26,22 +26,22 @@ namespace Mtaka
         }
 
         /// <summary>
-        /// ¥¢¿Å¤¤
+        /// å¤±è¡¡ä¸­
         /// </summary>
         private void Imbalancing(object sender, float imbalanceTime)
         {
-            // ¥¢¿Åª¬ºAªº ¥¢¿Å®É¶¡ = ¨Æ¥ó±µ¦¬¨ìªº¥¢¿Å®É¶¡
+            // å¤±è¡¡ç‹€æ…‹çš„ å¤±è¡¡æ™‚é–“ = äº‹ä»¶æ¥æ”¶åˆ°çš„å¤±è¡¡æ™‚é–“
             stateEnemyImbalance.imbalanceTime = imbalanceTime;
             stateEnemyTrack.isImbalance = true;
-            // ÅÜ§ó¬°¥¢¿Åª¬ºA
+            // è®Šæ›´ç‚ºå¤±è¡¡ç‹€æ…‹
             ChangeState(stateEnemyImbalance);
         }
 
-        // ¤¸¥ó³QÃö³¬ (enabled = false) ®É·|°õ¦æ¤@¦¸
+        // å…ƒä»¶è¢«é—œé–‰ (enabled = false) æ™‚æœƒåŸ·è¡Œä¸€æ¬¡
         private void OnDisable()
         {
             currentState.StateExit();
-            print("<color=#f36>ª¬ºA¾÷°±¤î</color>");
+            print("<color=#f36>ç‹€æ…‹æ©Ÿåœæ­¢</color>");
         }
 
         private void Update()
@@ -50,7 +50,7 @@ namespace Mtaka
         }
 
         /// <summary>
-        /// §ó·sª¬ºA¾÷
+        /// æ›´æ–°ç‹€æ…‹æ©Ÿ
         /// </summary>
         private void UpdateState()
         {
@@ -58,16 +58,16 @@ namespace Mtaka
         }
 
         /// <summary>
-        /// §óÅÜª¬ºA¾÷
+        /// æ›´è®Šç‹€æ…‹æ©Ÿ
         /// </summary>
-        /// <param name="nextState">¤U¤@­Óª¬ºA</param>
+        /// <param name="nextState">ä¸‹ä¸€å€‹ç‹€æ…‹</param>
         public void ChangeState(IState nextState)
         {
-            // ­ì¥»ªºª¬ºA Â÷¶}
+            // åŸæœ¬çš„ç‹€æ…‹ é›¢é–‹
             currentState.StateExit();
-            // ¤U¤@­Óª¬ºA ¶i¤J
+            // ä¸‹ä¸€å€‹ç‹€æ…‹ é€²å…¥
             nextState.StateEnter();
-            // §ó·s¥Ø«eª¬ºA¬°¤U¤@­Óª¬ºA
+            // æ›´æ–°ç›®å‰ç‹€æ…‹ç‚ºä¸‹ä¸€å€‹ç‹€æ…‹
             currentState = nextState;
         }
     }

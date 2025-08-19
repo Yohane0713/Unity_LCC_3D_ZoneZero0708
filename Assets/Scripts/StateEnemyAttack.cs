@@ -1,19 +1,19 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 namespace Mtaka
 {
     /// <summary>
-    /// ª¬ºA¡G¼Ä¤H§ğÀ»
+    /// ç‹€æ…‹ï¼šæ•µäººæ”»æ“Š
     /// </summary>
     public class StateEnemyAttack : State
     {
-        [SerializeField, Header("§ğÀ»®É¶¡"), Range(0, 10)]
+        [SerializeField, Header("æ”»æ“Šæ™‚é–“"), Range(0, 10)]
         private float attackTime = 3;
-        [SerializeField, Header("°lÂÜª¬ºA")]
+        [SerializeField, Header("è¿½è¹¤ç‹€æ…‹")]
         private StateEnemyTrack stateEnemyTrack;
 
-        private string parAttack = "Ä²µo§ğÀ»_©òÀY";
+        private string parAttack = "è§¸ç™¼æ”»æ“Š_æ–§é ­";
         private bool isAttacking;
         private WaitForSeconds waitAttackTime;
 
@@ -26,13 +26,13 @@ namespace Mtaka
         public override void StateEnter()
         {
             base.StateEnter();
-            print("<color=#f44>¶i¤J§ğÀ»ª¬ºA</color>");
+            print("<color=#f44>é€²å…¥æ”»æ“Šç‹€æ…‹</color>");
         }
 
         public override void StateExit()
         {
             base.StateExit();
-            print("<color=#f11>Â÷¶}§ğÀ»ª¬ºA</color>");
+            print("<color=#f11>é›¢é–‹æ”»æ“Šç‹€æ…‹</color>");
         }
 
         public override void StateUpdate()
@@ -45,11 +45,11 @@ namespace Mtaka
         private IEnumerator Attack()
         {
             if (isAttacking) yield break;
-            // §ğÀ»®É­±¦Vª±®a³B²z¡A¥ıÀò±oª±®a®y¼Ğ
+            // æ”»æ“Šæ™‚é¢å‘ç©å®¶è™•ç†ï¼Œå…ˆç²å¾—ç©å®¶åº§æ¨™
             Vector3 target = playerPoint.position;
-            // Á×§K°ª«×¤£¦P¾É­P±ÛÂà¡A±N¥Ø¼Ğ®y¼Ğªº°ª«×³]©w¬°¦¹ª«¥óªº°ª«×
+            // é¿å…é«˜åº¦ä¸åŒå°è‡´æ—‹è½‰ï¼Œå°‡ç›®æ¨™åº§æ¨™çš„é«˜åº¦è¨­å®šç‚ºæ­¤ç‰©ä»¶çš„é«˜åº¦
             target.y = transform.position.y;
-            // ­±¦V®y¼Ğ¥Ø¼Ğ
+            // é¢å‘åº§æ¨™ç›®æ¨™
             transform.LookAt(target);
             isAttacking = true;
             ani.SetFloat(parMove, 0);

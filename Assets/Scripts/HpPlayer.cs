@@ -1,4 +1,4 @@
-using StarterAssets;
+ï»¿using StarterAssets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Mtaka
 {
     /// <summary>
-    /// ¦å¶q¨t²Î¡Gª±®a
+    /// è¡€é‡ç³»çµ±ï¼šç©å®¶
     /// </summary>
     public class HpPlayer : HpSystem
     {
@@ -19,8 +19,8 @@ namespace Mtaka
             thirdPersonController = GetComponent<ThirdPersonController>();
             comboSystem = GetComponent<ComboSystem>();
             base.Awake();
-            imgHp = GameObject.Find("¹Ï¤ù_¦å±ø").GetComponent<Image>();
-            textHp = GameObject.Find("¤å¦r_¦å¶q").GetComponent<TMP_Text>();
+            imgHp = GameObject.Find("åœ–ç‰‡_è¡€æ¢").GetComponent<Image>();
+            textHp = GameObject.Find("æ–‡å­—_è¡€é‡").GetComponent<TMP_Text>();
             UpdateUI();
         }
 
